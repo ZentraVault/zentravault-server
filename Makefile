@@ -1,4 +1,4 @@
-BINARY = myapp
+BINARY = zentravault-server
 VERSION ?= 0.1.0
 SRC_DIR = src
 OUTPUT = target/$(BINARY)-$(VERSION)
