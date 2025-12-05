@@ -45,6 +45,28 @@ func (r *Repository) GetUserByPublicID(ctx context.Context, publicID string) (*U
 	return &u, nil
 }
 
+func (r *Repository) GetUserByEmail(ctx context.Context, email string) (*User, error) {
+	filter := bson.M{"email": email}
+
+	var u User
+	err := r.col.FindOne(ctx, filter).Decode(&u)
+	if err != nil {
+		return nil, err
+	}
+	return &u, nil
+}
+
+func (r *Repository) GetUserByToken(ctx context.Context, token string) (*User, error) {
+	filter := bson.M{"token": token}
+
+	var u User
+	err := r.col.FindOne(ctx, filter).Decode(&u)
+	if err != nil {
+		return nil, err
+	}
+	return &u, nil
+}
+
 func (r *Repository) ListUsers(ctx context.Context, limit int64) ([]User, error) {
 	opts := options.Find().SetLimit(limit)
 
